@@ -65,7 +65,7 @@ public class OTPConfirmationWithRegistration extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_otpconfirmation_with_registration);
 
-        init();
+        init(); // initialization
 
         sendOTP(userPhone, false);
 
@@ -125,7 +125,7 @@ public class OTPConfirmationWithRegistration extends AppCompatActivity {
         userPass = getIntent().getStringExtra("userPass").toString();
     }
 
-    void sendOTP(String userPhoneNumber, boolean isResend) {
+    void sendOTP(String userPhoneNumber, boolean isResend) {    // sending otp
         otpTimer();
         PhoneAuthOptions.Builder builder =
                 PhoneAuthOptions.newBuilder(mAuth)

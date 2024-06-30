@@ -44,15 +44,16 @@ public class NewRegistration extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_newregistration);
 
+        //initialization
         regButton=findViewById(R.id.btn_register);
-        userName=findViewById(R.id.et_REG_name);
+        userName=findViewById(R.id.et_REG_name);        //id initialize in xml to design
         userEmail=findViewById(R.id.et_REG_email);
         userPhone=findViewById(R.id.et_REG_phn);
         userPass=findViewById(R.id.et_REG_pass);
         userRetypePass=findViewById(R.id.et_REG_retypepass);
         countryCodePicker=findViewById(R.id.countryCodePicker);
 
-        countryCodePicker.registerCarrierNumberEditText(userPhone);
+        countryCodePicker.registerCarrierNumberEditText(userPhone);  //countrywise
 
 
         regButton.setOnClickListener(new View.OnClickListener() {

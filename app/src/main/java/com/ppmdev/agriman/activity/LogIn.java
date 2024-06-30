@@ -26,7 +26,7 @@ import com.ppmdev.agriman.utils.AndroidUtil;
 public class LogIn extends AppCompatActivity {
 
     private Button btnLogin;
-    private EditText userEmail;
+    private EditText userEmail;        //to catch the layout view
     private EditText userPassword;
     private TextView btnRegister;
 
@@ -36,7 +36,7 @@ public class LogIn extends AppCompatActivity {
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {   //to view generate
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_login);
@@ -46,24 +46,25 @@ public class LogIn extends AppCompatActivity {
             return insets;
         });
 
+        // initialization
         userEmail=findViewById(R.id.et_login_emailOrPhn);
-       userPassword=findViewById(R.id.et_login_pass);
+        userPassword=findViewById(R.id.et_login_pass);
         btnLogin = findViewById(R.id.btnlogin);
         mAuth=FirebaseAuth.getInstance();
         btnRegister=findViewById(R.id.tv_REG_login);
 
-        btnLogin.setOnClickListener(new View.OnClickListener() {
+        btnLogin.setOnClickListener(new View.OnClickListener() {         // after clicking login
             @Override
             public void onClick(View view) {
                 String userInputedEmail;
                 String userInputedPass;
 
-                userInputedEmail=userEmail.getText().toString();
-                userInputedPass=userPassword.getText().toString();
+                userInputedEmail=userEmail.getText().toString();   //inputed email in userinputedemail (store)
+                userInputedPass=userPassword.getText().toString();   //inputed pass in userinputedepass (store)
 
                 if(TextUtils.isEmpty(userInputedEmail) || !userInputedEmail.matches(emailPattern)){
                     //Toast.makeText(LogIn.this, "Enter email or phone", Toast.LENGTH_SHORT).show();
-                    userEmail.setError("Enter valid email");
+                    userEmail.setError("Enter valid email");            //checking if empty
                     return;
                 }
                 if(TextUtils.isEmpty(userInputedPass)){
@@ -74,10 +75,11 @@ public class LogIn extends AppCompatActivity {
 
 
 
-                performLogIn(userInputedEmail, userInputedPass);
+                performLogIn(userInputedEmail, userInputedPass);  //after email pass, performlogin called
             }
         });
 
+        //intent = one page to another
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -90,16 +92,16 @@ public class LogIn extends AppCompatActivity {
     private void performLogIn(String userInputedEmail, String userInputedPass) {
         mAuth.signInWithEmailAndPassword(userInputedEmail,userInputedPass)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
+            @Override    //intent= one activity to another
             public void onComplete(@NonNull Task<AuthResult> task) {
-                    if(task.isSuccessful()){
+                    if(task.isSuccessful()){              //if login success
                         //AndroidUtil.showToast(getApplicationContext(),"Login successful");
                         Intent intent = new Intent(LogIn.this,HomePage.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
                     }else{
                         AndroidUtil.showToast(getApplicationContext(),"Invalid email or password");
-                    }
+                    }                                     // Toast= prompt msg show
 
             }
         });

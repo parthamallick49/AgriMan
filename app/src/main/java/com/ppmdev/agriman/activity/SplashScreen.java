@@ -32,6 +32,7 @@ public class SplashScreen extends AppCompatActivity {
 
         });
 
+        //Direct logIn or LogIn require
         new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
             @Override
             public void run() {
