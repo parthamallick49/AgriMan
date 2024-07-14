@@ -24,7 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textColor="@color/black"
+            android:textColor="@color/theamColor_1"
             android:text="Blog"
             android:textSize="25dp"
             android:textStyle="bold"/>
@@ -65,7 +65,7 @@
                 android:layout_height="wrap_content"
                 android:text="The Art and Science of Agriculture"
                 android:textStyle="bold"
-                android:textSize="20dp"
+                android:textSize="22dp"
                 android:layout_marginTop="16dp" />
 
             <TextView
@@ -85,7 +85,7 @@
                 android:layout_height="wrap_content"
                 android:text="By, Md. Karim Khan"
                 android:layout_marginTop="16dp"
-                android:textStyle="italic"
+                android:textStyle="italic|bold"
                 android:textSize="14dp"
                 android:gravity="end" />
 

@@ -36,7 +36,7 @@
         android:id="@+id/cardView"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        app:cardCornerRadius="50dp"
+        app:cardCornerRadius="60dp"
         app:cardElevation="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -102,6 +102,20 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_profilePage_username"
         app:layout_constraintVertical_bias="0.0" />
 
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:text="(Email can not be change)"
+        android:textSize="12dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/textView6"
+        app:layout_constraintTop_toTopOf="@+id/textView6"
+        app:layout_constraintVertical_bias="0.65999997" />
+
     <EditText
         android:id="@+id/et_profilePage_email"
         android:layout_width="0dp"
@@ -115,6 +129,7 @@
         android:textColor="@color/black"
         android:textSize="20dp"
         android:textStyle="normal"
+        android:inputType="text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -150,6 +165,7 @@
         android:textSize="20dp"
         android:textStyle="normal"
         android:hint="+880 1xxx-xxxx"
+        android:inputType="number"
         android:backgroundTint="@color/theamColor_2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/et_profilePage_email"

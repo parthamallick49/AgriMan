@@ -71,6 +71,7 @@ public class ProfileFragment extends Fragment {
         profilePic = view.findViewById(R.id.iv_profile_Photo);
         userName = view.findViewById(R.id.tv_profilePage_username);
         userEmail = view.findViewById(R.id.et_profilePage_email);
+        userEmail.setEnabled(false);
         userPhone = view.findViewById(R.id.et_profilePage_phoneNumber);
         btnLogOut = view.findViewById(R.id.tv_btnLogOut);
         btnUpdateProfile = view.findViewById(R.id.et_btnUpdateProfile);

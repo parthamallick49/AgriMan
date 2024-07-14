@@ -5,10 +5,14 @@ import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.DrawableContainer;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.AttributeSet;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -16,6 +20,7 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
@@ -37,6 +42,7 @@ import com.ppmdev.agriman.fragment.ProfileFragment;
 import com.ppmdev.agriman.model.BlogModel;
 import com.ppmdev.agriman.model.UserModel;
 import com.ppmdev.agriman.utils.AndroidUtil;
+import com.ppmdev.agriman.utils.FirebaseUtil;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -47,12 +53,13 @@ public class HomePage extends AppCompatActivity
     private DrawerLayout drawerLayout;
     private ImageButton buttonDrawerToggle;
     private NavigationView navigationView;
+    private View navHeader;
     private BottomNavigationView bottomNavigationView;
 
     private TextView tvUsername;
     private ImageView profilePic;
+    private TextView tvUserPhone;
     private TextView tvWeather;
-    private Uri profilePicUri;
     private UserModel currentUserModel;
     private TextView toolbarName;
 
@@ -87,6 +94,7 @@ public class HomePage extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 drawerLayout.open();
+                getUserData();
             }
         });
 
@@ -98,15 +106,21 @@ public class HomePage extends AppCompatActivity
 
                 if (itemId == R.id.navAboutUs){
                     //Toast.makeText(HomePage.this, "About Us Clicked", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(getApplicationContext(),AboutUs.class));
+                    Intent intent = new Intent(getApplicationContext(),AboutUs.class);
+                    //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
                 }
                 if (itemId == R.id.navContactUs){
                     //Toast.makeText(HomePage.this, "Contact Us Clicked", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(getApplicationContext(),ContactUs.class));
+                    Intent intent = new Intent(getApplicationContext(),ContactUs.class);
+                    //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
                 }
                 if (itemId == R.id.navFAQ){
                     //Toast.makeText(HomePage.this, "FAQ Clicked", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(getApplicationContext(), Faq.class));
+                    Intent intent = new Intent(getApplicationContext(), Faq.class);
+                    //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
                 }
 
                 drawerLayout.close();
@@ -114,7 +128,7 @@ public class HomePage extends AppCompatActivity
                 return false;
             }
         });
-       // getUserData();
+
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         getSupportFragmentManager().beginTransaction().replace(R.id.container,homefragment).commit();
@@ -180,35 +194,38 @@ public class HomePage extends AppCompatActivity
         }
     }
 
-    /*private void getUserData() {
-        FirebaseUtil.getImgFromFirebaseStorage(FirebaseUtil.currentUserId()).getDownloadUrl()
+    private void getUserData() {
+        FirebaseUtil.getCurrentProfilePicStorageRef().getDownloadUrl()
                 .addOnCompleteListener(task -> {
                     if(task.isSuccessful()){
-                        profilePicUri= task.getResult();
+                        Uri profilePicUri = task.getResult();
                         if(profilePicUri!=null){
                             AndroidUtil.setProfilePicture(getApplicationContext(),profilePicUri,profilePic);
                         }
-
                     }
                 });
 
         FirebaseUtil.currentUserDetails().get().addOnCompleteListener(task -> {
             currentUserModel = task.getResult().toObject(UserModel.class);
-            if(currentUserModel!=null){
-                tvUsername.setText(currentUserModel.getUserName());
-            }
+            tvUsername.setText(currentUserModel.getUserName().toString());
+            tvUserPhone.setText(currentUserModel.getUserPhone().toString());
         });
-    }*/
+    }
+
+
 
     private void init(){
+
         drawerLayout= (DrawerLayout) findViewById(R.id.drawerLayout);
         buttonDrawerToggle=findViewById(R.id.nav_drawer);
         navigationView=findViewById(R.id.navigationView);
+        navHeader=navigationView.getHeaderView(0);
         bottomNavigationView=findViewById(R.id.bottomNavigationView);
         tvWeather=findViewById(R.id.tvWeather);
 
-        tvUsername=findViewById(R.id.navdrawer_username);
-        profilePic=findViewById(R.id.navdrawer_pofilePic);
+        tvUsername=(TextView) navHeader.findViewById(R.id.navdrawer_username);
+        profilePic=(ImageView) navHeader.findViewById(R.id.navdrawer_pofilePic);
+        tvUserPhone=(TextView)navHeader.findViewById(R.id.navdrawer_userPhone);
 
         toolbarName= findViewById(R.id.toolbar_name);
 

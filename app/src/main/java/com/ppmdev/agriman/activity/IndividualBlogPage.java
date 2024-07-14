@@ -91,6 +91,6 @@ public class IndividualBlogPage extends AppCompatActivity {
                 .into(blogImage);
         blogTitle.setText(blogModel.getBlogTitle());
         blogContent.setText(blogModel.getBlogContent());
-        blogWriterName.setText("By "+blogModel.getBlogWriterName());
+        blogWriterName.setText("By, "+blogModel.getBlogWriterName());
     }
 }

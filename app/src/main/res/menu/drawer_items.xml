@@ -4,7 +4,7 @@
     <item
         android:icon="@drawable/icon_aboutus"
         android:id="@+id/navAboutUs"
-        android:title="About Us"/>
+        android:title="About Us" />
     <item
         android:icon="@drawable/icon_contactus"
         android:id="@+id/navContactUs"
